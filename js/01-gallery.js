@@ -28,7 +28,7 @@ for (let galleryitem of galleryItems) {
 gallery.addEventListener("click", showImage);
 
 function showImage(e) {
-  event.preventDefault();
+  e.preventDefault();
   if (e.target.nodeName !== "IMG") {
     return;
   }
