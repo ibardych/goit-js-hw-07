@@ -27,18 +27,19 @@ for (let galleryitem of galleryItems) {
 
 gallery.addEventListener("click", showImage);
 
-function showImage(event) {
+function showImage(e) {
   event.preventDefault();
-  if (event.target.nodeName !== "IMG") {
+  if (e.target.nodeName !== "IMG") {
     return;
   }
 
-  showModal(event.target);
+  showModal(e.target);
 }
 
 function showModal(imagelink) {
-  const original = imagelink.dataset.source;
+  document.addEventListener("keydown", closeModal);
 
+  const original = imagelink.dataset.source;
   const instance = basicLightbox.create(
     `
     <div class="modal">
@@ -53,4 +54,11 @@ function showModal(imagelink) {
   );
 
   instance.show();
+
+  function closeModal(e) {
+    if (e.key === "Escape") {
+      instance.close();
+      document.removeEventListener("keydown", closeModal);
+    }
+  }
 }
