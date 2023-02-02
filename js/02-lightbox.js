@@ -5,24 +5,13 @@ console.log(galleryItems);
 
 const gallery = document.querySelector(".gallery");
 
-for (let galleryitem of galleryItems) {
-  const itemcontainer = document.createElement("div");
-  itemcontainer.classList.add("gallery__item");
+let items = "";
 
-  const link = document.createElement("a");
-  link.classList.add("gallery__link");
-  link.setAttribute("href", galleryitem.original);
-
-  const img = document.createElement("img");
-  img.classList.add("gallery__image");
-  img.setAttribute("src", galleryitem.preview);
-  img.setAttribute("alt", galleryitem.description);
-
-  link.appendChild(img);
-  itemcontainer.appendChild(link);
-
-  gallery.append(itemcontainer);
+for (const { original, preview, description } of galleryItems) {
+  items += `<div calss="gallery__item"><a class="gallery__link" href="${original}"><img class="gallery__image" src="${preview}" alt="${description}"></a></div>`;
 }
+
+gallery.insertAdjacentHTML("afterbegin", items);
 
 var lightbox = new SimpleLightbox(".gallery a", {
   captions: true,
